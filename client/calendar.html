@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academic Calendar — AttendAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <div class="app-container">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand">
+          <div class="brand-icon">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <div>
+            <div class="brand-title">Attend<span>AI</span></div>
+            <div class="brand-tagline">Track. Predict. Improve.</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="sidebar-nav">
+        <span class="nav-label">Core Engine</span>
+        <a href="dashboard.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="today.html" class="nav-item">
+          <i data-lucide="check-circle"></i>
+          <span>Today</span>
+          <span class="nav-badge" style="background:var(--brand-primary);">QUICK</span>
+        </a>
+        <a href="import.html" class="nav-item">
+          <i data-lucide="file-up"></i>
+          <span>Import Data</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i data-lucide="check-square"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="recovery.html" class="nav-item">
+          <i data-lucide="calculator"></i>
+          <span>Bunk & Recovery</span>
+        </a>
+        <a href="timetable.html" class="nav-item">
+          <i data-lucide="clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="calendar.html" class="nav-item active">
+          <i data-lucide="calendar"></i>
+          <span>Calendar</span>
+        </a>
+
+        <span class="nav-label">Intelligence</span>
+        <a href="ai.html" class="nav-item">
+          <i data-lucide="bot"></i>
+          <span>AI Assistant</span>
+        </a>
+        <a href="analytics.html" class="nav-item">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Analytics</span>
+        </a>
+        <a href="notifications.html" class="nav-item">
+          <i data-lucide="bell"></i>
+          <span>Notifications</span>
+        </a>
+
+        <span class="nav-label">Account</span>
+        <a href="profile.html" class="nav-item">
+          <i data-lucide="user"></i>
+          <span>Profile & Rules</span>
+        </a>
+        <a href="login.html" class="nav-item" style="color:var(--status-danger);">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-avatar">JR</div>
+        <div class="user-info">
+          <div class="user-name">Jagadesh R</div>
+          <div class="user-role">22BCSE104 • CSE</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-menu-toggle" onclick="document.getElementById('app-sidebar').classList.toggle('open')">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="page-title-group">
+            <h1>Academic Attendance Calendar</h1>
+            <p>Day-by-day attendance history and scheduled sessions.</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="header-btn" onclick="toggleTheme()" title="Toggle Theme">
+            <i data-lucide="sun" class="theme-toggle-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <div class="glass-card">
+          <div class="section-header">
+            <div class="section-title">
+              <i data-lucide="calendar" style="color:var(--brand-primary);"></i>
+              <span id="calendar-month-title">October 2026</span>
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn-secondary btn-sm" onclick="showToast('Previous month preview', 'info')">&larr; Prev</button>
+              <button class="btn btn-secondary btn-sm" onclick="showToast('Next month preview', 'info')">Next &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Day names header -->
+          <div class="calendar-grid" style="margin-bottom:0;">
+            <div class="calendar-day-header">Sun</div>
+            <div class="calendar-day-header">Mon</div>
+            <div class="calendar-day-header">Tue</div>
+            <div class="calendar-day-header">Wed</div>
+            <div class="calendar-day-header">Thu</div>
+            <div class="calendar-day-header">Fri</div>
+            <div class="calendar-day-header">Sat</div>
+          </div>
+
+          <!-- Days Grid -->
+          <div class="calendar-grid" id="calendar-days-grid">
+            <!-- Rendered dynamically by calendar.js -->
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Day Detail Modal -->
+  <div id="day-detail-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); z-index:2000; align-items:center; justify-content:center; padding:1rem;">
+    <div class="glass-card" style="width:100%; max-width:500px; background:var(--bg-secondary);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+        <h3 id="modal-date-title" style="font-size:1.15rem; font-weight:700;">Date Details</h3>
+        <button class="btn btn-secondary btn-icon-only" onclick="closeDayDetail()">✕</button>
+      </div>
+      <div id="modal-classes-list">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-nav-bar">
+    <a href="dashboard.html" class="mobile-nav-item">
+      <i data-lucide="home"></i>
+      <span>Home</span>
+    </a>
+    <a href="today.html" class="mobile-nav-item">
+      <i data-lucide="check-circle"></i>
+      <span>Today</span>
+    </a>
+    <a href="calendar.html" class="mobile-nav-item active">
+      <i data-lucide="calendar"></i>
+      <span>Calendar</span>
+    </a>
+    <a href="ai.html" class="mobile-nav-item">
+      <i data-lucide="bot"></i>
+      <span>AI</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item">
+      <i data-lucide="user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/calendar.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>

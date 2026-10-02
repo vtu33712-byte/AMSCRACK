@@ -1,0 +1,169 @@
+/* =========================================================
+   AttendAI — Responsive & Mobile Experience
+   Mobile Bottom Navigation: HOME, ATTENDANCE, CALENDAR, AI, PROFILE
+   ========================================================= */
+
+/* Mobile Bottom Navigation Bar */
+.mobile-nav-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--border-glass);
+  z-index: 1000;
+  padding: 0 0.5rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.mobile-nav-item i, .mobile-nav-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-nav-item.active {
+  color: var(--brand-primary);
+}
+
+.mobile-nav-item.active i, .mobile-nav-item.active svg {
+  stroke: var(--brand-primary);
+}
+
+/* Mobile Header Hamburger */
+.mobile-menu-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-wrapper {
+    margin-left: 0;
+    padding-bottom: 70px; /* space for mobile nav */
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .mobile-nav-bar {
+    display: flex;
+  }
+
+  .top-header {
+    padding: 0 1rem;
+  }
+
+  .page-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .dashboard-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-insight-banner {
+    flex-direction: column;
+    padding: 1.25rem;
+  }
+
+  .ai-avatar-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .calendar-cell {
+    min-height: 60px;
+    padding: 0.35rem;
+  }
+
+  .cell-date-num {
+    font-size: 0.75rem;
+  }
+
+  .indicator-dot {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.35rem;
+  }
+
+  .schedule-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .schedule-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .mark-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .subjects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-bubble {
+    max-width: 88%;
+  }
+}

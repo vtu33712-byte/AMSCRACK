@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal — AttendAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body style="display:flex; align-items:center; justify-content:center; min-height:100vh; padding:1.5rem; background:var(--bg-primary);">
+  <div class="glass-card" style="width:100%; max-width:420px; padding:2.5rem 2rem;">
+    <div style="text-align:center; margin-bottom:2rem;">
+      <div style="width:48px; height:48px; border-radius:var(--radius-sm); background:#ef4444; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; color:white;">
+        <i data-lucide="shield-alert" style="width:26px; height:26px;"></i>
+      </div>
+      <h2 style="font-size:1.35rem; font-weight:800;">Super Admin Portal</h2>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.25rem;">
+        Authorized University Operators Only
+      </p>
+    </div>
+
+    <!-- Security Advisory -->
+    <div style="background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); padding:0.65rem 0.85rem; margin-bottom:1.5rem; font-size:0.75rem; color:var(--text-secondary); display:flex; gap:0.5rem; align-items:center;">
+      <i data-lucide="lock" style="width:16px; height:16px; color:var(--text-muted); flex-shrink:0;"></i>
+      <span>All administrative operations and login events are permanently recorded in immutable audit logs.</span>
+    </div>
+
+    <form id="admin-login-form" onsubmit="handleAdminLogin(event)">
+      <div class="form-group">
+        <label class="form-label">Administrator ID / Email</label>
+        <input type="text" id="admin-user-input" class="form-input" placeholder="admin@attendai.edu" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Security Key / Password</label>
+        <input type="password" id="admin-pass-input" class="form-input" placeholder="••••••••••••" required autocomplete="current-password">
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%; padding:0.75rem; font-size:0.9rem; margin-top:0.5rem; background:#ef4444;">
+        Authenticate Admin Console &rarr;
+      </button>
+
+      <div style="margin-top:1.5rem; text-align:center; font-size:0.75rem; color:var(--text-muted);">
+        Student? <a href="login.html" style="color:var(--brand-primary); text-decoration:none;">Go to Student Login</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script>
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      showToast('Authenticating administrator session...', 'info');
+      setTimeout(() => {
+        window.location.href = 'admin.html';
+      }, 600);
+    }
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>

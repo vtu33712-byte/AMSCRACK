@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Import & Document Analysis — AttendAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .scope-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .scope-tab-btn {
+      padding: 0.6rem 1.1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      transition: all 0.15s ease;
+    }
+    .scope-tab-btn.active {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border-color: var(--brand-primary);
+    }
+    .dropzone-box {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      background: var(--bg-secondary);
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+    .dropzone-box:hover {
+      border-color: var(--brand-primary);
+    }
+  </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand">
+          <div class="brand-icon">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <div>
+            <div class="brand-title">Attend<span>AI</span></div>
+            <div class="brand-tagline">Track. Predict. Improve.</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="sidebar-nav">
+        <span class="nav-label">Core Engine</span>
+        <a href="dashboard.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="today.html" class="nav-item">
+          <i data-lucide="check-circle"></i>
+          <span>Today</span>
+          <span class="nav-badge">QUICK</span>
+        </a>
+        <a href="import.html" class="nav-item active">
+          <i data-lucide="file-up"></i>
+          <span>Import Data</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i data-lucide="check-square"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="recovery.html" class="nav-item">
+          <i data-lucide="calculator"></i>
+          <span>Bunk & Recovery</span>
+        </a>
+        <a href="timetable.html" class="nav-item">
+          <i data-lucide="clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="calendar.html" class="nav-item">
+          <i data-lucide="calendar"></i>
+          <span>Calendar</span>
+        </a>
+
+        <span class="nav-label">Intelligence</span>
+        <a href="ai.html" class="nav-item">
+          <i data-lucide="bot"></i>
+          <span>AI Assistant</span>
+        </a>
+        <a href="analytics.html" class="nav-item">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Analytics</span>
+        </a>
+        <a href="notifications.html" class="nav-item">
+          <i data-lucide="bell"></i>
+          <span>Notifications</span>
+        </a>
+
+        <span class="nav-label">Account</span>
+        <a href="profile.html" class="nav-item">
+          <i data-lucide="user"></i>
+          <span>Profile & Rules</span>
+        </a>
+        <a href="login.html" class="nav-item" style="color:var(--danger);">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-avatar">JR</div>
+        <div class="user-info">
+          <div class="user-name">Jagadesh R</div>
+          <div class="user-role">22BCSE104 • CSE</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-menu-toggle" onclick="document.getElementById('app-sidebar').classList.toggle('open')">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="page-title-group">
+            <h1>AI Import & Document Analysis Hub</h1>
+            <p>Convert screenshots, PDFs, spreadsheets, or plain text into structured attendance baselines.</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="header-btn" onclick="toggleTheme()" title="Toggle Theme">
+            <i data-lucide="sun" class="theme-toggle-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <main class="page-content" style="max-width:1050px;">
+        <!-- Scope Tabs -->
+        <div class="scope-tabs">
+          <button type="button" class="scope-tab-btn active" onclick="setImportScope('attendance')">📊 Attendance Baseline</button>
+          <button type="button" class="scope-tab-btn" onclick="setImportScope('calendar')">📅 Academic Calendar</button>
+          <button type="button" class="scope-tab-btn" onclick="setImportScope('timetable')">⏰ Weekly Timetable</button>
+          <button type="button" class="scope-tab-btn" onclick="setImportScope('combined')">📦 Complete Bundle</button>
+        </div>
+
+        <!-- Ingestion Box -->
+        <div class="glass-card" style="margin-bottom:2rem;">
+          <h2 id="import-scope-title" style="font-size:1.25rem; font-weight:700; margin-bottom:0.25rem;">
+            Import College Attendance Baseline
+          </h2>
+          <p id="import-scope-helper" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">
+            Upload or paste your subject-wise conducted and attended counts.
+          </p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:flex-start;">
+            <!-- Left: Document / Image OCR Upload -->
+            <div>
+              <label class="form-label" style="font-weight:600;">Upload Document (Screenshot, PDF, CSV, Excel)</label>
+              <div class="dropzone-box" onclick="document.getElementById('file-upload-input').click()">
+                <i data-lucide="file-up" style="width:36px; height:36px; color:var(--brand-primary); margin-bottom:0.75rem;"></i>
+                <div style="font-weight:600; font-size:0.925rem;">Click to upload file</div>
+                <div style="font-size:0.775rem; color:var(--text-muted); margin-top:0.25rem;">
+                  Supports AMS screenshots (OCR), official PDF reports, and spreadsheets (.csv, .xlsx)
+                </div>
+                <input type="file" id="file-upload-input" style="display:none;" accept=".pdf,.png,.jpg,.jpeg,.csv,.xlsx" onchange="handleFileUpload(event)">
+              </div>
+            </div>
+
+            <!-- Right: Direct Text Input -->
+            <div>
+              <label class="form-label" style="font-weight:600;">Or Paste Plain Text / Raw Copy</label>
+              <textarea id="import-text-input" class="form-textarea" rows="6" placeholder="Example:&#10;Java - 35/42&#10;DBMS - 38/45&#10;Cyber Security - 34/40&#10;Mathematics - 40/46&#10;Operating Systems - 32/41"></textarea>
+              <button type="button" class="btn btn-secondary" style="width:100%; margin-top:0.75rem;" onclick="processTextImport()">
+                <i data-lucide="cpu"></i> Analyze Text with AI Parser
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Extraction Preview & Confidence Grading (Sections 38, 39) -->
+        <div class="glass-card" id="import-preview-section" style="display:none; margin-bottom:2rem;">
+          <div class="section-header">
+            <div>
+              <div class="section-title">
+                <i data-lucide="eye" style="color:var(--brand-primary);"></i>
+                Extracted Data Preview & Confirmation
+              </div>
+              <div id="preview-source-label" style="font-size:0.775rem; color:var(--text-muted); margin-top:0.2rem;">
+                Source: Document Upload
+              </div>
+            </div>
+            <span class="badge badge-safe">AI Parsed & Ready for Confirmation</span>
+          </div>
+
+          <p style="font-size:0.825rem; color:var(--text-secondary); margin-bottom:1rem;">
+            Please inspect the detected numbers. You can edit any value directly before confirming.
+          </p>
+
+          <div style="overflow-x:auto;">
+            <table class="projection-table">
+              <thead>
+                <tr>
+                  <th>Subject Name</th>
+                  <th>Code</th>
+                  <th>Present</th>
+                  <th>Conducted</th>
+                  <th>Percentage</th>
+                  <th>Confidence</th>
+                </tr>
+              </thead>
+              <tbody id="import-preview-tbody">
+                <!-- Populated dynamically by import.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem; border-top:1px solid var(--border); padding-top:1rem;">
+            <button class="btn btn-secondary" onclick="document.getElementById('import-preview-section').style.display='none'">Cancel</button>
+            <button class="btn btn-primary" onclick="confirmImportAndSave()">
+              <i data-lucide="check"></i> Confirm & Create Baseline
+            </button>
+          </div>
+        </div>
+
+        <!-- Import History Table (Section 41) -->
+        <div class="glass-card">
+          <div class="section-header">
+            <div class="section-title">
+              <i data-lucide="history" style="color:var(--text-secondary);"></i>
+              Import History & Ingestion Log
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="projection-table">
+              <thead>
+                <tr>
+                  <th>Data Scope</th>
+                  <th>Source Document</th>
+                  <th>Records</th>
+                  <th>Status</th>
+                  <th>Import Date</th>
+                </tr>
+              </thead>
+              <tbody id="import-history-tbody">
+                <!-- Populated dynamically by import.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Baseline Merge / Replace Protection Modal (Section 40) -->
+  <div id="import-merge-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); z-index:2000; align-items:center; justify-content:center; padding:1.5rem;">
+    <div class="glass-card" style="width:100%; max-width:480px; background:var(--bg-secondary); border:1px solid var(--border); padding:2rem;">
+      <div style="text-align:center; margin-bottom:1.5rem;">
+        <i data-lucide="alert-triangle" style="width:40px; height:40px; color:var(--warning); margin-bottom:0.75rem;"></i>
+        <h3 style="font-size:1.3rem; font-weight:800;">Existing Attendance Baseline Found</h3>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:0.35rem;">
+          How would you like AttendAI to apply this newly imported college record?
+        </p>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.5rem;">
+        <button class="btn btn-primary" style="justify-content:flex-start; text-align:left; padding:0.85rem;" onclick="executeBaselineSave('replace')">
+          <div>
+            <strong>Create / Replace Baseline</strong>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.8);">Set this as your new official starting baseline</div>
+          </div>
+        </button>
+        <button class="btn btn-secondary" style="justify-content:flex-start; text-align:left; padding:0.85rem;" onclick="executeBaselineSave('merge')">
+          <div>
+            <strong>Merge with Current Records</strong>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Append non-conflicting subjects and preserve live events</div>
+          </div>
+        </button>
+      </div>
+
+      <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('import-merge-modal').style.display='none'">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-nav-bar">
+    <a href="dashboard.html" class="mobile-nav-item">
+      <i data-lucide="home"></i>
+      <span>Home</span>
+    </a>
+    <a href="today.html" class="mobile-nav-item">
+      <i data-lucide="check-circle"></i>
+      <span>Today</span>
+    </a>
+    <a href="import.html" class="mobile-nav-item active">
+      <i data-lucide="file-up"></i>
+      <span>Import</span>
+    </a>
+    <a href="ai.html" class="mobile-nav-item">
+      <i data-lucide="bot"></i>
+      <span>AI</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item">
+      <i data-lucide="user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/import.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>

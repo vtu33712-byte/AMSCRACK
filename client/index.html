@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AttendAI — Track. Predict. Improve.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="top-header" style="border-bottom:1px solid var(--border);">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">
+        <i data-lucide="shield-check"></i>
+      </div>
+      <div>
+        <div class="brand-title">Attend<span>AI</span></div>
+        <div class="brand-tagline">Track. Predict. Improve.</div>
+      </div>
+    </a>
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+      <button class="header-btn" onclick="toggleTheme()" title="Toggle Theme">
+        <i data-lucide="sun" class="theme-toggle-icon"></i>
+      </button>
+      <a href="login.html" class="btn btn-secondary">Student Login</a>
+      <a href="register.html" class="btn btn-primary">Create Account</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="page-content" style="max-width:1080px; padding-top:4rem; text-align:center;">
+    <div class="badge badge-info" style="margin-bottom:1.5rem; padding:0.35rem 0.85rem; font-size:0.8rem;">
+      ✨ The Personal Attendance Operating System for College Students
+    </div>
+
+    <h1 style="font-size:3rem; font-weight:800; line-height:1.2; letter-spacing:-0.03em; margin-bottom:1.25rem;">
+      Import Once. Confirm Daily.<br>
+      <span style="color:var(--brand-primary);">
+        Track. Predict. Improve.
+      </span>
+    </h1>
+
+    <p style="font-size:1.1rem; color:var(--text-secondary); max-width:680px; margin:0 auto 2.25rem; line-height:1.6;">
+      AttendAI eliminates manual percentage recalculation. Set your college baseline via AI document import, tap your classes daily in 5 seconds, and let AttendAI automatically project safe bunks, recovery targets, and AI guidance.
+    </p>
+
+    <div style="display:flex; justify-content:center; gap:0.85rem; flex-wrap:wrap; margin-bottom:3.5rem;">
+      <a href="dashboard.html" class="btn btn-primary" style="padding:0.85rem 1.75rem; font-size:0.95rem;">
+        Open Student Dashboard &rarr;
+      </a>
+      <a href="today.html" class="btn btn-secondary" style="padding:0.85rem 1.5rem; font-size:0.95rem;">
+        ⚡ 5-Second Daily Attendance
+      </a>
+      <a href="import.html" class="btn btn-secondary" style="padding:0.85rem 1.5rem; font-size:0.95rem;">
+        📸 AI Document Import
+      </a>
+    </div>
+
+    <!-- Feature Pillars Grid -->
+    <div class="stats-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); text-align:left;">
+      <div class="glass-card">
+        <div style="width:36px; height:36px; border-radius:var(--radius-sm); background:var(--info-bg); color:var(--info); display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+          <i data-lucide="file-up"></i>
+        </div>
+        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:0.4rem;">AI Document Import</h3>
+        <p style="color:var(--text-secondary); font-size:0.85rem; line-height:1.5;">
+          Upload college AMS screenshots, PDFs, spreadsheets, or raw text. AI extracts baseline counts with confidence checks.
+        </p>
+      </div>
+
+      <div class="glass-card">
+        <div style="width:36px; height:36px; border-radius:var(--radius-sm); background:var(--warning-bg); color:var(--warning); display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:0.4rem;">Exact Bunk & Recovery</h3>
+        <p style="color:var(--text-secondary); font-size:0.85rem; line-height:1.5;">
+          Calculates precisely how many classes you can safely miss or must attend consecutively to maintain the required 75% cutoff.
+        </p>
+      </div>
+
+      <div class="glass-card">
+        <div style="width:36px; height:36px; border-radius:var(--radius-sm); background:var(--success-bg); color:var(--success); display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+          <i data-lucide="bot"></i>
+        </div>
+        <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:0.4rem;">Grounded AI Copilot</h3>
+        <p style="color:var(--text-secondary); font-size:0.85rem; line-height:1.5;">
+          Answers tactical questions like "Can I bunk tomorrow?" powered strictly by your actual verified attendance data.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account — AttendAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body style="display:flex; align-items:center; justify-content:center; min-height:100vh; padding:2rem 1rem;">
+  <div class="ambient-glow"></div>
+
+  <div class="glass-card" style="width:100%; max-width:540px; padding:2.5rem 2rem;">
+    <div style="text-align:center; margin-bottom:1.75rem;">
+      <a href="index.html" class="brand" style="justify-content:center; margin-bottom:1rem;">
+        <div class="brand-icon">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <div>
+          <div class="brand-title">Attend<span>AI</span></div>
+          <div class="brand-tagline">Track. Predict. Improve.</div>
+        </div>
+      </a>
+      <h2 style="font-size:1.4rem; font-weight:800;">Create Student Account</h2>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">
+        Register once to start automatic AI attendance tracking.
+      </p>
+    </div>
+
+    <!-- Live Sync Notice -->
+    <div style="background:var(--bg-glass-strong); border:1px solid var(--border-glass); border-radius:var(--radius-md); padding:0.75rem 1rem; margin-bottom:1.5rem; font-size:0.8rem; color:var(--text-secondary); display:flex; gap:0.6rem; align-items:center;">
+      <i data-lucide="shield" style="color:var(--brand-primary); width:18px; height:18px; flex-shrink:0;"></i>
+      <span>Your registration automatically connects with the Super Admin academic governance system while maintaining complete data privacy.</span>
+    </div>
+
+    <form id="register-form" onsubmit="handleRegistration(event)">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="reg-name" class="form-input" placeholder="e.g. Arun Kumar" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Roll Number</label>
+          <input type="text" id="reg-roll" class="form-input" placeholder="e.g. VTU33821" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">College Email</label>
+        <input type="email" id="reg-email" class="form-input" placeholder="e.g. arun.vtu33821@college.edu" required>
+      </div>
+
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label class="form-label">Department</label>
+          <select id="reg-dept" class="form-select" required>
+            <option value="CSE">Computer Science & Engineering</option>
+            <option value="CSE_CYBER">CSE (Cyber Security)</option>
+            <option value="ECE">Electronics & Communication</option>
+            <option value="EEE">Electrical & Electronics</option>
+            <option value="MECH">Mechanical Engineering</option>
+            <option value="CIVIL">Civil Engineering</option>
+            <option value="IT">Information Technology</option>
+            <option value="AIDS">AI & Data Science</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Semester</label>
+          <select id="reg-sem" class="form-select">
+            <option value="1">Sem 1</option>
+            <option value="2">Sem 2</option>
+            <option value="3">Sem 3</option>
+            <option value="4">Sem 4</option>
+            <option value="5">Sem 5</option>
+            <option value="6" selected>Sem 6</option>
+            <option value="7">Sem 7</option>
+            <option value="8">Sem 8</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="reg-password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <input type="password" id="reg-confirm" class="form-input" placeholder="••••••••" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%; padding:0.85rem; font-size:0.95rem; margin-top:0.5rem;">
+        Create Account &rarr;
+      </button>
+
+      <div style="margin-top:1.5rem; text-align:center; font-size:0.825rem; color:var(--text-muted);">
+        Already registered? <a href="login.html" style="color:var(--brand-primary); text-decoration:none; font-weight:600;">Sign In</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    function handleRegistration(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value;
+      const roll = document.getElementById('reg-roll').value;
+      const dept = document.getElementById('reg-dept').value;
+
+      showToast(`Account created for ${name} (${roll})!`, 'success');
+
+      setTimeout(() => {
+        // Redirect to setup wizard for baseline attendance import
+        window.location.href = 'setup.html';
+      }, 800);
+    }
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>

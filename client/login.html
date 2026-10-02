@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Sign In — AttendAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body style="display:flex; align-items:center; justify-content:center; min-height:100vh; padding:1.5rem; background:var(--bg-primary);">
+  <div class="glass-card" style="width:100%; max-width:420px; padding:2.5rem 2rem;">
+    <div style="text-align:center; margin-bottom:2rem;">
+      <a href="index.html" class="brand" style="justify-content:center; margin-bottom:1rem;">
+        <div class="brand-icon">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <div>
+          <div class="brand-title">Attend<span>AI</span></div>
+          <div class="brand-tagline">Track. Predict. Improve.</div>
+        </div>
+      </a>
+      <h2 style="font-size:1.35rem; font-weight:800;">Student Sign In</h2>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.25rem;">
+        Access your attendance dashboard and AI copilot
+      </p>
+    </div>
+
+    <form id="student-login-form" onsubmit="handleStudentLogin(event)">
+      <div class="form-group">
+        <label class="form-label">Roll Number or College Email</label>
+        <input type="text" id="login-identifier" class="form-input" placeholder="e.g. 22BCSE104" value="22BCSE104" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" value="studentPass123" required autocomplete="current-password">
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; font-size:0.8rem;">
+        <label style="display:flex; align-items:center; gap:0.4rem; color:var(--text-muted); cursor:pointer;">
+          <input type="checkbox" checked> Remember session
+        </label>
+        <a href="#" style="color:var(--brand-primary); text-decoration:none;" onclick="openForgotPasswordNotice()">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%; padding:0.75rem; font-size:0.9rem;">
+        Sign In &rarr;
+      </button>
+
+      <div style="margin-top:1.5rem; text-align:center; font-size:0.8rem; color:var(--text-muted);">
+        Don't have an account? <a href="register.html" style="color:var(--brand-primary); text-decoration:none; font-weight:600;">Create Student Account</a>
+      </div>
+
+      <div style="margin-top:1.25rem; border-top:1px solid var(--border); padding-top:1rem; text-align:center; font-size:0.75rem; color:var(--text-muted);">
+        University Administrator? <a href="admin-login.html" style="color:var(--text-secondary); text-decoration:underline;">Admin Portal</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Forgot Password Notice Modal (Section 21) -->
+  <div id="forgot-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); z-index:2000; align-items:center; justify-content:center; padding:1.5rem;">
+    <div class="glass-card" style="width:100%; max-width:440px; background:var(--bg-secondary); border:1px solid var(--border); padding:2rem; text-align:center;">
+      <i data-lucide="help-circle" style="width:40px; height:40px; color:var(--brand-primary); margin-bottom:0.75rem;"></i>
+      <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:0.5rem;">Password Reset Support</h3>
+      <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.5rem;">
+        For student privacy and security, password resets are verified directly through your AttendAI Super Administrator.
+        <br><br>
+        Please contact your department admin to verify your student identity and receive a secure 1-time temporary login password.
+      </p>
+      <button class="btn btn-primary" style="width:100%;" onclick="document.getElementById('forgot-modal').style.display='none'">
+        Understood
+      </button>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script>
+    function handleStudentLogin(e) {
+      e.preventDefault();
+      showToast('Authenticating student session...', 'info');
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 500);
+    }
+
+    function openForgotPasswordNotice() {
+      document.getElementById('forgot-modal').style.display = 'flex';
+      if (window.lucide) lucide.createIcons();
+    }
+
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>

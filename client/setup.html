@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setup Wizard — AttendAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .wizard-indicators {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .wizard-indicators::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border-glass);
+      z-index: 1;
+    }
+    .wizard-indicator-step {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border-glass);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+    .wizard-indicator-step.active {
+      border-color: var(--brand-primary);
+      background: var(--brand-primary);
+      color: white;
+      box-shadow: var(--shadow-glow);
+    }
+    .wizard-indicator-step.completed {
+      border-color: var(--status-safe);
+      background: var(--status-safe);
+      color: white;
+    }
+    .import-tab-btn {
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border-glass);
+      background: var(--bg-glass);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+    .import-tab-btn.active {
+      background: var(--brand-gradient);
+      color: white;
+      border-color: transparent;
+    }
+  </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem 1rem;">
+  <div class="ambient-glow"></div>
+
+  <div class="glass-card" style="width:100%; max-width:720px; padding:2.5rem 2rem;">
+    <!-- Wizard Header -->
+    <div style="text-align:center; margin-bottom:2rem;">
+      <a href="index.html" class="brand" style="justify-content:center; margin-bottom:0.75rem;">
+        <div class="brand-icon">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <div>
+          <div class="brand-title">Attend<span>AI</span></div>
+          <div class="brand-tagline">Track. Predict. Improve.</div>
+        </div>
+      </a>
+      <h2 style="font-size:1.4rem; font-weight:800;">First-Time Student Onboarding</h2>
+      <p style="font-size:0.85rem; color:var(--text-muted);">Set up your profile, timetable, and import your initial college attendance baseline.</p>
+    </div>
+
+    <!-- Step Progress Indicators (1 to 6) -->
+    <div class="wizard-indicators">
+      <div id="step-indicator-1" class="wizard-indicator-step active">1</div>
+      <div id="step-indicator-2" class="wizard-indicator-step">2</div>
+      <div id="step-indicator-3" class="wizard-indicator-step">3</div>
+      <div id="step-indicator-4" class="wizard-indicator-step">4</div>
+      <div id="step-indicator-5" class="wizard-indicator-step">5</div>
+      <div id="step-indicator-6" class="wizard-indicator-step">6</div>
+    </div>
+
+    <!-- Wizard Form Body -->
+    <form id="wizard-form" onsubmit="event.preventDefault();">
+      <!-- STEP 1: Personal Info -->
+      <div id="wizard-step-1">
+        <h3 style="font-size:1.1rem; margin-bottom:1rem; font-weight:700;">Step 1: Personal Information</h3>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" value="Jagadesh R" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Roll Number</label>
+          <input type="text" class="form-input" value="22BCSE104" placeholder="e.g. 22BCSE104" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">College Email</label>
+          <input type="email" class="form-input" value="jagadesh@college.edu" placeholder="e.g. yourname@college.edu" required>
+        </div>
+      </div>
+
+      <!-- STEP 2: Academic Info -->
+      <div id="wizard-step-2" style="display:none;">
+        <h3 style="font-size:1.1rem; margin-bottom:1rem; font-weight:700;">Step 2: Academic Information</h3>
+        <div class="form-group">
+          <label class="form-label">College / University</label>
+          <input type="text" class="form-input" value="Institute of Technology" required>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label class="form-label">Department</label>
+            <input type="text" class="form-input" value="Computer Science & Engineering" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Degree</label>
+            <input type="text" class="form-input" value="B.Tech" required>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label class="form-label">Year</label>
+            <input type="text" class="form-input" value="3rd Year">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Semester</label>
+            <input type="text" class="form-input" value="6th Semester">
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Attendance Rule -->
+      <div id="wizard-step-3" style="display:none;">
+        <h3 style="font-size:1.1rem; margin-bottom:1rem; font-weight:700;">Step 3: Minimum Attendance Target</h3>
+        <div class="form-group">
+          <label class="form-label">Required Attendance Percentage (%)</label>
+          <input type="number" class="form-input" value="75" min="50" max="100" required>
+          <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.4rem;">
+            Default target is set to 75%. Safe bunk and recovery calculations will be tuned to this requirement.
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Subjects -->
+      <div id="wizard-step-4" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <h3 style="font-size:1.1rem; font-weight:700;">Step 4: Register Subjects</h3>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="addSubjectRow()">+ Add Row</button>
+        </div>
+        <div id="wizard-subject-list">
+          <div class="form-group" style="display:grid; grid-template-columns:2fr 1fr 2fr; gap:0.5rem;">
+            <input type="text" class="form-input" value="Java Programming" required>
+            <input type="text" class="form-input" value="CS301" required>
+            <input type="text" class="form-input" value="Dr. K. Sharma">
+          </div>
+          <div class="form-group" style="display:grid; grid-template-columns:2fr 1fr 2fr; gap:0.5rem;">
+            <input type="text" class="form-input" value="Database Management Systems" required>
+            <input type="text" class="form-input" value="CS302" required>
+            <input type="text" class="form-input" value="Prof. Priya V">
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: Timetable Setup -->
+      <div id="wizard-step-5" style="display:none;">
+        <h3 style="font-size:1.1rem; margin-bottom:1rem; font-weight:700;">Step 5: Configure Weekly Timetable</h3>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">
+          Default timetable periods will automatically synchronize with your daily schedule. You can fine-tune individual slot times anytime.
+        </p>
+        <div class="glass-card" style="padding:1rem; background:var(--bg-secondary);">
+          <span class="badge badge-safe">✓ Monday – Saturday Standard Schedule Configured</span>
+        </div>
+      </div>
+
+      <!-- STEP 6: Existing Attendance Baseline Import -->
+      <div id="wizard-step-6" style="display:none;">
+        <h3 style="font-size:1.1rem; margin-bottom:0.5rem; font-weight:700;">Step 6: Import College Attendance Baseline</h3>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">
+          Import your current college attendance once. AttendAI sets your baseline and starts live increments from today.
+        </p>
+
+        <!-- Import Methods Selector (Section 8) -->
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1.25rem;">
+          <button type="button" class="import-tab-btn active" onclick="switchImportMethod('manual')">✍️ Manual Entry</button>
+          <button type="button" class="import-tab-btn" onclick="switchImportMethod('csv')">📄 CSV / Excel</button>
+          <button type="button" class="import-tab-btn" onclick="switchImportMethod('pdf')">📑 College PDF</button>
+          <button type="button" class="import-tab-btn" onclick="switchImportMethod('ocr')">📸 Screenshot / OCR</button>
+        </div>
+
+        <div id="import-content-manual">
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:0.75rem; align-items:center;">
+              <span style="font-weight:600;">Java Programming</span>
+              <input type="number" class="form-input" placeholder="Conducted" value="42">
+              <input type="number" class="form-input" placeholder="Present" value="35">
+            </div>
+            <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:0.75rem; align-items:center;">
+              <span style="font-weight:600;">DBMS</span>
+              <input type="number" class="form-input" placeholder="Conducted" value="38">
+              <input type="number" class="form-input" placeholder="Present" value="31">
+            </div>
+            <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:0.75rem; align-items:center;">
+              <span style="font-weight:600;">Cyber Security</span>
+              <input type="number" class="form-input" placeholder="Conducted" value="40">
+              <input type="number" class="form-input" placeholder="Present" value="34">
+            </div>
+          </div>
+        </div>
+
+        <div id="import-content-upload" style="display:none; text-align:center; padding:1.5rem; border:2px dashed var(--border-glass); border-radius:var(--radius-md);">
+          <i data-lucide="upload-cloud" style="width:40px; height:40px; color:var(--brand-primary); margin-bottom:0.5rem;"></i>
+          <p id="upload-instruction-text" style="font-size:0.9rem; color:var(--text-primary); font-weight:600;">
+            Upload College Attendance Document
+          </p>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">
+            AttendAI parses subjects, conducted classes, and attended classes. You will see an interactive preview before confirmation.
+          </p>
+          <button type="button" class="btn btn-secondary btn-sm" style="margin-top:1rem;" onclick="simulateDocumentParse()">
+            Browse File (Demo OCR Simulation)
+          </button>
+        </div>
+      </div>
+
+      <!-- Wizard Navigation Controls -->
+      <div style="display:flex; justify-content:space-between; margin-top:2rem; border-top:1px solid var(--border-glass); padding-top:1.5rem;">
+        <button type="button" id="wizard-prev-btn" class="btn btn-secondary" onclick="prevStep()">← Previous</button>
+        <button type="button" id="wizard-next-btn" class="btn btn-primary" onclick="nextStep()">Next Step →</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/setup.js"></script>
+  <script>
+    function switchImportMethod(method) {
+      const btns = document.querySelectorAll('.import-tab-btn');
+      btns.forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const manualDiv = document.getElementById('import-content-manual');
+      const uploadDiv = document.getElementById('import-content-upload');
+      const uploadText = document.getElementById('upload-instruction-text');
+
+      if (method === 'manual') {
+        manualDiv.style.display = 'block';
+        uploadDiv.style.display = 'none';
+      } else {
+        manualDiv.style.display = 'none';
+        uploadDiv.style.display = 'block';
+        if (method === 'ocr') {
+          uploadText.textContent = 'Upload Attendance Portal Screenshot (Auto OCR Processing)';
+        } else if (method === 'pdf') {
+          uploadText.textContent = 'Upload Official College Attendance PDF';
+        } else {
+          uploadText.textContent = 'Upload Attendance CSV or Excel Spreadsheet';
+        }
+      }
+    }
+
+    function simulateDocumentParse() {
+      showToast('Parsing document with AI extraction...', 'info');
+      setTimeout(() => {
+        showToast('Detected 5 subjects! Baseline populated.', 'success');
+        document.getElementById('import-content-manual').style.display = 'block';
+        document.getElementById('import-content-upload').style.display = 'none';
+      }, 1000);
+    }
+
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>

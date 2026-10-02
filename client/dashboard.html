@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard — AttendAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <div class="app-container">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand">
+          <div class="brand-icon">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <div>
+            <div class="brand-title">Attend<span>AI</span></div>
+            <div class="brand-tagline">Track. Predict. Improve.</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="sidebar-nav">
+        <span class="nav-label">Core Engine</span>
+        <a href="dashboard.html" class="nav-item active">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="today.html" class="nav-item">
+          <i data-lucide="check-circle"></i>
+          <span>Today</span>
+          <span class="nav-badge" style="background:var(--brand-primary);">QUICK</span>
+        </a>
+        <a href="import.html" class="nav-item">
+          <i data-lucide="file-up"></i>
+          <span>Import Data</span>
+        </a>
+        <a href="attendance.html" class="nav-item">
+          <i data-lucide="check-square"></i>
+          <span>Attendance</span>
+        </a>
+        <a href="recovery.html" class="nav-item">
+          <i data-lucide="calculator"></i>
+          <span>Bunk & Recovery</span>
+        </a>
+        <a href="timetable.html" class="nav-item">
+          <i data-lucide="clock"></i>
+          <span>Timetable</span>
+        </a>
+        <a href="calendar.html" class="nav-item">
+          <i data-lucide="calendar"></i>
+          <span>Calendar</span>
+        </a>
+
+        <span class="nav-label">Intelligence</span>
+        <a href="ai.html" class="nav-item">
+          <i data-lucide="bot"></i>
+          <span>AI Assistant</span>
+          <span class="nav-badge">NEW</span>
+        </a>
+        <a href="analytics.html" class="nav-item">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Analytics</span>
+        </a>
+        <a href="notifications.html" class="nav-item">
+          <i data-lucide="bell"></i>
+          <span>Notifications</span>
+        </a>
+
+        <span class="nav-label">Account</span>
+        <a href="profile.html" class="nav-item">
+          <i data-lucide="user"></i>
+          <span>Profile & Rules</span>
+        </a>
+        <a href="login.html" class="nav-item" style="color:var(--status-danger);">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-avatar">JR</div>
+        <div class="user-info">
+          <div class="user-name">Jagadesh R</div>
+          <div class="user-role">22BCSE104 • CSE</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Container -->
+    <div class="main-wrapper">
+      <!-- Top Sticky Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-menu-toggle" onclick="document.getElementById('app-sidebar').classList.toggle('open')">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="page-title-group">
+            <h1>Student Dashboard</h1>
+            <p>Welcome back, Jagadesh 👋 Here is your real-time attendance overview.</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="header-btn" onclick="toggleTheme()" title="Toggle Theme">
+            <i data-lucide="sun" class="theme-toggle-icon"></i>
+          </button>
+          
+          <a href="today.html" class="btn btn-primary btn-sm">
+            <i data-lucide="zap"></i> Quick Daily Attendance
+          </a>
+        </div>
+      </header>
+
+      <!-- Page Body -->
+      <main class="page-content">
+        <!-- AI Daily Insight Card -->
+        <div class="ai-insight-banner">
+          <div class="ai-avatar-icon">
+            <i data-lucide="sparkles"></i>
+          </div>
+          <div class="ai-insight-content">
+            <div class="ai-insight-header">
+              <div class="ai-insight-title">AI Attendance Copilot Insight</div>
+              <span class="badge badge-info">Today's Briefing</span>
+            </div>
+            <div class="ai-insight-text" id="ai-insight-text-content">
+              Loading real-time attendance intelligence...
+            </div>
+            <div class="ai-insight-chips" id="ai-insight-chips"></div>
+          </div>
+        </div>
+
+        <!-- Metric Cards & Gauge Grid -->
+        <div class="stats-grid">
+          <!-- Circular Progress Widget -->
+          <div class="glass-card gauge-card">
+            <span class="stat-label">Overall Attendance</span>
+            <div class="circular-gauge-container">
+              <svg class="gauge-svg" viewBox="0 0 160 160">
+                <circle class="gauge-bg" cx="80" cy="80" r="70" />
+                <circle class="gauge-fill" id="gauge-progress-circle" cx="80" cy="80" r="70" />
+              </svg>
+              <div class="gauge-center-text">
+                <div class="gauge-percentage" id="overall-percentage-val">78.41%</div>
+                <span id="overall-status-badge" class="badge badge-safe">SAFE</span>
+              </div>
+            </div>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Required Threshold: 75.0%</span>
+          </div>
+
+          <!-- Card 1: Attended -->
+          <div class="glass-card stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Classes Attended</span>
+              <div class="stat-icon-wrapper" style="color:var(--status-safe);">
+                <i data-lucide="check-circle-2"></i>
+              </div>
+            </div>
+            <div class="stat-value" id="stat-attended" style="color:var(--status-safe);">147</div>
+            <div class="stat-footer positive">
+              <i data-lucide="trending-up" style="width:14px; height:14px;"></i>
+              <span>+1.6% from last week</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Total Conducted -->
+          <div class="glass-card stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Total Conducted</span>
+              <div class="stat-icon-wrapper" style="color:var(--brand-primary);">
+                <i data-lucide="layers"></i>
+              </div>
+            </div>
+            <div class="stat-value" id="stat-conducted">185</div>
+            <div class="stat-footer">
+              <span>Across 5 registered subjects</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Safe Bunk Capacity -->
+          <div class="glass-card stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Safe Bunk Capacity</span>
+              <div class="stat-icon-wrapper" style="color:var(--status-warning);">
+                <i data-lucide="shield-check"></i>
+              </div>
+            </div>
+            <div class="stat-value" id="stat-safe-bunks" style="color:var(--status-warning);">8 Classes</div>
+            <div class="stat-footer warning">
+              <span>Before dropping below 75%</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Recovery Needed -->
+          <div class="glass-card stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Recovery Target</span>
+              <div class="stat-icon-wrapper" style="color:var(--status-danger);">
+                <i data-lucide="flame"></i>
+              </div>
+            </div>
+            <div class="stat-value" id="stat-recovery" style="color:var(--status-danger);">None</div>
+            <div class="stat-footer danger">
+              <span>Overall compliant</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-Column Main Section: Today's Classes & Subject Attention -->
+        <div class="dashboard-main-grid">
+          <!-- Left: Today's Schedule -->
+          <div class="glass-card">
+            <div class="section-header">
+              <div class="section-title">
+                <i data-lucide="calendar-clock" style="color:var(--brand-primary);"></i>
+                Today's Scheduled Classes
+              </div>
+              <a href="today.html" class="btn btn-secondary btn-sm">Open Full Screen &rarr;</a>
+            </div>
+            <div class="schedule-list" id="today-schedule-container">
+              <!-- Rendered dynamically by dashboard.js -->
+            </div>
+          </div>
+
+          <!-- Right: Subject Risk & Attention List -->
+          <div class="glass-card">
+            <div class="section-header">
+              <div class="section-title">
+                <i data-lucide="alert-octagon" style="color:var(--status-warning);"></i>
+                Subject Health Status
+              </div>
+              <a href="attendance.html" style="font-size:0.8rem; color:var(--brand-primary); text-decoration:none;">View All &rarr;</a>
+            </div>
+            <div id="risk-subjects-container">
+              <!-- Rendered dynamically by dashboard.js -->
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar: HOME, TODAY, CALENDAR, AI, PROFILE -->
+  <nav class="mobile-nav-bar">
+    <a href="dashboard.html" class="mobile-nav-item active">
+      <i data-lucide="home"></i>
+      <span>Home</span>
+    </a>
+    <a href="today.html" class="mobile-nav-item">
+      <i data-lucide="check-circle"></i>
+      <span>Today</span>
+    </a>
+    <a href="calendar.html" class="mobile-nav-item">
+      <i data-lucide="calendar"></i>
+      <span>Calendar</span>
+    </a>
+    <a href="ai.html" class="mobile-nav-item">
+      <i data-lucide="bot"></i>
+      <span>AI</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item">
+      <i data-lucide="user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>
